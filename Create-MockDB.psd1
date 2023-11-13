@@ -33,7 +33,7 @@ Copyright = '(c) GuilGuildenstern. All rights reserved.'
 Description = 'Used for creating Mock-file from txt-table file'
 
 # Minimum version of the PowerShell engine required by this module
-# PowerShellVersion = ''
+PowerShellVersion = '7.2'
 
 # Name of the PowerShell host required by this module
 # PowerShellHostName = ''
