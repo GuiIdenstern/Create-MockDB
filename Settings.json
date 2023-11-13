@@ -25,6 +25,13 @@
       "Weight": ""
     }
   },
+  "PostgreSql": {
+    "Host": "localhost",
+    "User": "postgres",
+    "Pasword": "1",
+    "Name": "TerminalDbSKU",
+    "Port": "5432"
+  },
   "Paths": {
     "MockDB_txt": "C:\\Users\\mitya\\Documents\\Test_LFP\\MockDB.txt",
     "MockDB": "C:\\Users\\mitya\\Documents\\Test_LFP\\MockDB.csv"

@@ -204,35 +204,8 @@ function Set-MockDB {
     #$menu_list
 }
 
-function Remove-MenuItemsDB {
-    Install-PSql
 
-    $DBHost = 'localhost'
-    $DBUser = 'postgres'
-    $DBPasword = '1'
-    $DBport = '5432'
-    $DBName = 'TerminalDbSKU'
 
-    $connection = Connect-PostgreSQL -Server $DBHost -User $DBUser -Password $DBPasword -Port $DBport -Database $DBName
 
-    $query = 'select * from menu_items'
-
-    $result=
-    Invoke-PostgreSQL -Query $query -Connection $connection
-    Disconnect-PostgreSQL -Connection $connection
-    return $result
-}
-function Install-PSql {
-    if (!(Get-Module -ListAvailable -Name PostgreSQLCmdlets)) {
-        Install-Module -Name PostgreSQLCmdlets -Force
-    }
-    Import-Module -Name PostgresqlCmdlets
-}
-
-function Get-Settings{
-    $Settings=Get-Content .\Settings.json|ConvertFrom-Json
-    
-    return $Settings
-}
-
+Remove-MenuItemsDB
 #Set-MockDB -Path_Menu "C:\Users\mitya\Desktop\Текстовый документ.txt" -Header_Name 'Наименование по меню(как указано ценниках)' -Header_Id 'Внешний код в кассовой системе'  -Header_Proto 'Proto' -Debug

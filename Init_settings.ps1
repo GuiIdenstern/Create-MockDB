@@ -29,6 +29,13 @@ $Settings=@{
     Info=@{
         ObjectName="Test_Object"
     }
+    PostgreSql=@{
+        Host = 'localhost'
+        User = 'postgres'
+        Pasword = '1'
+        Port = '5432'
+        Name = 'TerminalDbSKU'
+    }
 }
 
 ConvertTo-Json -InputObject $Settings|Set-Content .\Settings.json
