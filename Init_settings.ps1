@@ -30,3 +30,5 @@ $Settings=@{
         ObjectName="Test_Object"
     }
 }
+
+ConvertTo-Json -InputObject $Settings|Set-Content .\Settings.json

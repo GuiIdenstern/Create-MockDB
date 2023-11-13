@@ -1,14 +1,3 @@
-<#
-    .PARAMETER Path_Menu
-        Расположение файла с экспортированным данными из документа заказчика. Файл должен иметь текстовый формат .txt и хранить данные с заголовками, разделенные табуляцией
-    
-        ПРИМЕР:
-            Короткое название в кассовой системе	Внешний код в кассовой системе	Выход
-            Абрикосы 1шт	А0010696	1 шт
-            Азиатский суп с курицей	А0025659	300 г
-            Азу из говядины	А0005868	75/75 г
-            Ананас	А0090211	100 г
-#>
 function Set-MockDB {
     [CmdletBinding()]
     param(
@@ -240,4 +229,10 @@ function Install-PSql {
     Import-Module -Name PostgresqlCmdlets
 }
 
-Set-MockDB -Path_Menu "C:\Users\mitya\Desktop\Текстовый документ.txt" -Header_Name 'Наименование по меню(как указано ценниках)' -Header_Id 'Внешний код в кассовой системе'  -Header_Proto 'Proto' -Debug
+function Get-Settings{
+    $Settings=Get-Content .\Settings.json|ConvertFrom-Json
+    
+    return $Settings
+}
+
+#Set-MockDB -Path_Menu "C:\Users\mitya\Desktop\Текстовый документ.txt" -Header_Name 'Наименование по меню(как указано ценниках)' -Header_Id 'Внешний код в кассовой системе'  -Header_Proto 'Proto' -Debug
