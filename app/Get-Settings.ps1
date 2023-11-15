@@ -7,7 +7,7 @@ function Get-Settings{
     #Проверка наличия файла Settings.json, прерывание если нет
     if(!(Test-Path .\Settings.json))
     {
-        #Write-Error "Файл Settings.json не найден." 
+        Write-Error "Файл Settings.json не найден."  -ErrorAction Stop
         "aaa"
     }
 

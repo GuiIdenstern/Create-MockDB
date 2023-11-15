@@ -13,7 +13,7 @@ function Set-MockDB {
     
     process {
         
-        $Settings=Get-Settings
+       $Settings=Get-Settings
 
         "bbb"
     }
