@@ -1,59 +1,40 @@
 function Set-MockDB {
     [CmdletBinding()]
-    param(
-        [parameter(Mandatory)]
-        [ValidateScript({
-                Test-Path -Path $_
-            }, ErrorMessage = 'Файл меню по адресу не найден')]
-        [ValidateScript({
-            (Split-Path -Path $_ -Extension) -eq '.txt'
-            }, ErrorMessage = 'Файл меню имеет расширение, отличное от .txt')]
-        [ValidateScript({
-            (Get-Content -Path $_).Length -gt 1
-            }, ErrorMessage = 'Файл меню пуст')]
-        [string]$Path_Menu,
-
-        [ValidateScript({
-            (Split-Path -Path $_ -Extension) -eq '.csv'
-            }, ErrorMessage = 'Файл меню имеет расширение, отличное от .csv')]
-        [string]$Path_Mock = 'C:\Users\mitya\Desktop\MockDb_test.csv',
-
-        [parameter(Mandatory)]
-        [ValidateNotNullOrEmpty()]
-        [string]$Header_Name,
-
-        [parameter(Mandatory)]
-        [ValidateNotNullOrEmpty()]
-        [string]$Header_Id,
-
-        [ValidateNotNullOrEmpty()]
-        [string]$Header_Weight,
-
-        [ValidateNotNullOrEmpty()]
-        [string]$Header_Count,
-
-        [ValidateNotNullOrEmpty()]
-        [string]$Header_Proto,
-
-        [ValidateNotNullOrEmpty()]
-        [string]$Header_Price,
-
-        [ValidateNotNullOrEmpty()]
-        [string]$Header_IsWeight,
-
-        [ValidateNotNullOrEmpty()]
-        [string] $Replacer_Proto='compot1',
-
-        [ValidateNotNullOrEmpty()]
-        [string]$Replacer_Price=100,
-
-        [switch] $ClearDatabase
+    param (
+        
     )
     
-    $OLD_MockDB_Path=Join-Path -Path (Split-Path -Path $Path_Mock -Parent) -ChildPath 'OLD_MockDB.csv'
+    begin {
+        .\app\Get-Settings.ps1
+        .\app\Install-PSql.ps1
+        .\app\Remove-MenuItemsDB.ps1
+        .\app\Set-OldMockDB.ps1
+    }
+    
+    process {
+        
+        $Settings=Get-Settings
+
+        "bbb"
+    }
+    
+    end {
+        
+    }
+}
+
+Set-MockDB
+
+<#
+function _Set-MockDB {
+          
+    Remove-MenuItemsDB
+    
 
     $menu_list = [System.Collections.ArrayList]::new()
     $id_list = [System.Collections.ArrayList]::new()
+
+
 
     if ($ClearDatabase) {
         Remove-MenuItemsDB
@@ -61,19 +42,7 @@ function Set-MockDB {
     } 
     
     #Пересоздание файла MockDB
-    if (Test-Path $Path_Mock) {
-        Write-Debug "Файл Mock по адресу $Path_Mock уже существует"
-        if(Test-Path ($OLD_MockDB_Path)){
-            Remove-Item -Path $OLD_MockDB_Path
-            Write-Debug "Старый файл Mock по адресу $OLD_MockDB_Path был удален"
-        }
-        $newname = Rename-Item -Path $Path_Mock -NewName 'OLD_MockDB.csv' -PassThru -Force
-        Write-Debug "Новый файл Mock по адресу $newname был создан"
-    }
-    else {
-        New-Item -Path $Path_Mock
-        Write-Debug "Новый файл Mock по адресу $Path_Mock был создан"
-    }
+
 
     #Получение содержимого файла меню
     $menu = Get-Content -Path $Path_Menu -Encoding UTF8
@@ -202,10 +171,8 @@ function Set-MockDB {
         }
     Set-Content -Path $Path_Mock -Value $menu_list -Encoding UTF8
     #$menu_list
-}
+}#>
 
 
 
-
-Remove-MenuItemsDB
 #Set-MockDB -Path_Menu "C:\Users\mitya\Desktop\Текстовый документ.txt" -Header_Name 'Наименование по меню(как указано ценниках)' -Header_Id 'Внешний код в кассовой системе'  -Header_Proto 'Proto' -Debug

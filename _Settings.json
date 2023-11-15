@@ -1,0 +1,47 @@
+{
+  "Paths": {
+    "MockDB_BasePath": "C:\\Users\\mitya\\Documents\\Test_LFP\\",
+    "MockDB": "MockDB.csv",
+    "MockDB_OLD": "OLD_MockDB.csv",
+    "MockDB_txt": "MockDB.txt"
+  },
+  "Info": {
+    "ObjectName": "Test_Object"
+  },
+  "MockDB": {
+    "Usage": {
+      "Features": {
+        "SavingOldMockDB": false,
+        "ClearDatabase": false
+      },
+      "Headers": {
+        "Proto": false,
+        "Price": false,
+        "IsWeight": false,
+        "Count": false,
+        "Weight": false
+      }
+    },
+    "Headers": {
+      "Proto": "Proto",
+      "Count": "countable",
+      "IsWeight": "Весовое",
+      "Price": "Цена",
+      "Id": "Внешний код в кассовой системе",
+      "Name": "Наименование по меню(как указано ценниках)",
+      "Weight": "Выход"
+    },
+    "Replacers": {
+      "Proto": "compot1",
+      "Weight": "",
+      "Price": "100"
+    }
+  },
+  "PostgreSql": {
+    "Port": "5432",
+    "Pasword": "1",
+    "User": "postgres",
+    "Name": "TerminalDbSKU",
+    "Host": "localhost"
+  }
+}

@@ -1,13 +1,15 @@
 function Remove-MenuItemsDB {
-    Install-PSql
+    [CmdletBinding()]
+    param (
+        [Parameter(Mandatory)]
+        $Settings
+    )
 
-    $Settings=(Get-Settings).PostgreSql
-
-    $DBHost = $Settings.Host
-    $DBUser = $Settings.User
-    $DBPasword = $Settings.Pasword
-    $DBPort = $Settings.Port
-    $DBName = $Settings.Name
+    $DBHost = $Settings.PostgreSql.Host
+    $DBUser = $Settings.PostgreSql.User
+    $DBPasword = $Settings.PostgreSql.Pasword
+    $DBPort = $Settings.PostgreSql.Port
+    $DBName = $Settings.PostgreSql.Name
 
     $connection = Connect-PostgreSQL -Server $DBHost -User $DBUser -Password $DBPasword -Port $DBPort -Database $DBName
 
@@ -16,5 +18,5 @@ function Remove-MenuItemsDB {
     $result=
     Invoke-PostgreSQL -Query $query -Connection $connection
     Disconnect-PostgreSQL -Connection $connection
-    return 'bruh'#$result
+    return $result
 }
